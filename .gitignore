@@ -6,3 +6,4 @@ zmk/
 build/
 *.uf2
 .west/
+.venv/
