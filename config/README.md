@@ -17,16 +17,29 @@ config/
 ## File Descriptions
 
 ### `behaviors.dtsi`
-Contains custom behavior definitions:
-- **hml** (home_row_mod_left): Left-hand home row mods with optimized timing
-- **hmr** (home_row_mod_right): Right-hand home row mods with optimized timing
-- **mt_special**: Standard mod-tap for special keys (ESC, ENTER)
+Contains individual behavior definitions for each hold-tap key:
 
-Key features:
+**Left Hand Home Row:**
+- **hml_f**: F key → Left Control
+- **hml_d**: D key → Available for configuration
+- **hml_s**: S key → Available for configuration  
+- **hml_a**: A key → Available for configuration
+
+**Right Hand Home Row:**
+- **hmr_j**: J key → Right Control
+- **hmr_k**: K key → Available for configuration
+- **hmr_l**: L key → Available for configuration
+- **hmr_semi**: ; key → Available for configuration
+
+**Special Keys:**
+- **mt_esc**: ESC key (Caps Lock position) → Left GUI
+- **mt_enter**: ENTER key (apostrophe position) → Right GUI
+
+Key features per behavior:
 - `flavor = "balanced"`: Balanced between tap and hold
-- `tapping-term-ms = 280`: Time to register a hold
+- `tapping-term-ms`: Time to register a hold (280ms for home row, 200ms for special)
 - `quick-tap-ms = 175`: Quick successive taps
-- `require-prior-idle-ms = 150`: Requires idle time before activation
+- `require-prior-idle-ms`: Idle time before activation (150ms home row, 100ms special)
 - `hold-trigger-on-release`: More reliable for fast typing
 - `hold-trigger-key-positions`: Only triggers hold on opposite hand keys
 
@@ -46,27 +59,46 @@ Main keymap file with:
 
 ## Current Home Row Mods
 
-### Left Hand
-- **F key**: Tap for F, Hold for Left Ctrl (`&hml LCTRL F`)
+### Active Configurations
 
-### Right Hand  
-- **J key**: Tap for J, Hold for Right Ctrl (`&hmr RCTRL J`)
+**Left Hand:**
+- **F key**: Tap for F, Hold for Left Ctrl (`&hml_f LCTRL F`)
 
-### Special Keys
-- **ESC** (Caps Lock position): Tap for ESC, Hold for Left GUI (`&mt_special LGUI ESC`)
-- **ENTER** (where ' was): Tap for ENTER, Hold for Right GUI (`&mt_special RGUI RET`)
+**Right Hand:**
+- **J key**: Tap for J, Hold for Right Ctrl (`&hmr_j RCTRL J`)
+
+**Special Keys:**
+- **ESC** (Caps Lock position): Tap for ESC, Hold for Left GUI (`&mt_esc LGUI ESC`)
+- **ENTER** (apostrophe position): Tap for ENTER, Hold for Right GUI (`&mt_enter RGUI RET`)
+
+### Available for Configuration
+
+Each key has a dedicated behavior ready to use:
+- `&hml_a` - A key (left pinky)
+- `&hml_s` - S key (left ring)
+- `&hml_d` - D key (left middle)
+- `&hmr_k` - K key (right middle)
+- `&hmr_l` - L key (right ring)
+- `&hmr_semi` - ; key (right pinky)
 
 ## Adding More Home Row Mods
 
-To add more home row modifiers, follow this pattern:
+To activate additional home row mods, edit the bindings in `corne.keymap`:
 
 ```c
-// In the default_layer bindings:
-&hml LSHIFT A    // Left hand: Hold A for Shift
-&hmr RSHIFT SEMI // Right hand: Hold ; for Shift
-&hml LALT S      // Left hand: Hold S for Alt
-&hmr RALT L      // Right hand: Hold L for Alt
+// Example: Full home row mods
+&hml_a LGUI A     // A: Hold for GUI
+&hml_s LALT S     // S: Hold for Alt
+&hml_d LSHFT D    // D: Hold for Shift
+&hml_f LCTRL F    // F: Hold for Ctrl (already active)
+
+&hmr_j RCTRL J    // J: Hold for Ctrl (already active)
+&hmr_k RSHFT K    // K: Hold for Shift
+&hmr_l RALT L     // L: Hold for Alt
+&hmr_semi RGUI SEMI // ;: Hold for GUI
 ```
+
+Each behavior can be individually tuned in `behaviors.dtsi`.
 
 ## Customization Tips
 
