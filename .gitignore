@@ -1,0 +1,8 @@
+modules/
+tools/
+zephyr/
+bootloader/
+zmk/
+build/
+*.uf2
+.west/
