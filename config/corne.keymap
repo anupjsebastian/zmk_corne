@@ -8,56 +8,106 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// Custom behaviors
-#include "behaviors.dtsi"
-
 / {
+        behaviors {
+                hml_a: home_row_mod_left_a {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <280>;
+                        quick-tap-ms = <175>;
+                        require-prior-idle-ms = <500>;
+                        bindings = <&kp>, <&kp>;
+                };
+
+                hml_s: home_row_mod_left_s {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <280>;
+                        quick-tap-ms = <175>;
+                        require-prior-idle-ms = <500>;
+                        bindings = <&kp>, <&kp>;
+                };
+
+                hml_f: home_row_mod_left_f {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <280>;
+                        quick-tap-ms = <175>;
+                        require-prior-idle-ms = <500>;
+                        bindings = <&kp>, <&kp>;
+                };
+
+                hmr_j: home_row_mod_right_j {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "balanced";
+                        tapping-term-ms = <280>;
+                        quick-tap-ms = <175>;
+                        require-prior-idle-ms = <500>;
+                        bindings = <&kp>, <&kp>;
+                };
+        };
+
         keymap {
                 compatible = "zmk,keymap";
 
-                default_layer {
+                base_layer {
+                        label = "Base";
 // ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
 // │ TAB │  Q  │  W  │  E  │  R  │  T  │   │  Y  │  U  │  I  │  O  │  P  │BSPC │
 // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
 // │ ESC │  A  │  S  │  D  │  F  │  G  │   │  H  │  J  │  K  │  L  │  ;  │ENTER│
-// │ GUI │     │     │     │CTRL │     │   │     │CTRL │     │     │     │ GUI │
+// │ GUI │ ALT │SHIFT│     │CTRL │     │   │     │CTRL │     │     │     │ GUI │
 // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
 // │SHIFT│  Z  │  X  │  C  │  V  │  B  │   │  N  │  M  │  ,  │  .  │  /  │SHIFT│
 // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
-//                   │ GUI │ LWR │ SPC │   │BSPC │ RSE │ ALT │
+//                   │LEFT │ RSE │ LWR │   │ SPC │ RSE │RIGHT│
 //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
                         bindings = <
-   &kp TAB         &kp Q &kp W &kp E &kp R            &kp T      &kp Y &kp U            &kp I     &kp O   &kp P    &kp BSPC
-   &mt_esc LGUI ESC &kp A &kp S &kp D &hml_f LCTRL F  &kp G      &kp H &hmr_j RCTRL J   &kp K     &kp L   &kp SEMI &mt_enter RGUI RET
-   &kp LSHFT       &kp Z &kp X &kp C &kp V            &kp B      &kp N &kp M            &kp COMMA &kp DOT &kp FSLH &kp RSHFT
-                                    &kp LGUI &mo 1 &kp SPACE      &kp BSPC &mo 2 &kp RALT
+   &kp TAB              &kp Q        &kp W        &kp E    &kp R          &kp T        &kp Y     &kp U          &kp I      &kp O    &kp P         &kp BSPC
+   &mt LGUI ESC         &hml_a LALT A &hml_s LSHFT S &kp D  &hml_f LCTRL F &kp G        &kp H     &hmr_j RCTRL J &kp K      &kp L    &kp SEMI      &mt RGUI RET
+   &kp LSHFT            &kp Z        &kp X        &kp C    &kp V          &kp B        &kp N     &kp M          &kp COMMA  &kp DOT  &kp FSLH      &kp RSHFT
+                                                  &kp LEFT &mo 2          &mo 1        &kp SPACE &mo 2          &kp RIGHT
                         >;
                 };
-                lower_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BKSP |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |      |
-// | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+                nav_layer {
+                        label = "Nav";
+// ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+// │ TAB │     │HOME │ UP  │ END │PGUP │   │  `  │  -  │  =  │  {  │  }  │ DEL │
+// ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+// │CAPS │     │LEFT │DOWN │RIGHT│PGDN │   │ LFT │ DWN │ UP  │ RGT │  '  │  \  │
+// ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+// │SHIFT│     │     │     │     │     │   │ F11 │ F12 │ VOL-│VOL+ │     │SHIFT│
+// └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+//                   │ GUI │ SPC │     │   │BKSP │     │ ALT │
+//                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
                         bindings = <
-   &kp TAB    &kp N1       &kp N2       &kp N3       &kp N4       &kp N5         &kp N6   &kp N7   &kp N8 &kp N9    &kp N0 &kp BSPC
-   &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &kp LEFT &kp DOWN &kp UP &kp RIGHT &trans &trans
-   &kp LSHFT  &trans       &trans       &trans       &trans       &trans         &trans   &trans   &trans &trans    &trans &trans
-                                    &kp LGUI     &trans       &kp SPACE      &kp RET  &trans   &kp RALT
+   &kp TAB    &trans &kp HOME &kp UP   &kp END   &kp PG_UP   &kp GRAVE &kp MINUS    &kp EQUAL     &kp LBRC     &kp RBRC &kp DEL
+   &kp CAPS   &trans &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN   &kp LEFT  &kp DOWN     &kp UP        &kp RIGHT    &kp SQT  &kp BSLH
+   &kp LSHFT  &trans &trans   &trans   &trans    &trans      &kp F11   &kp F12      &kp C_VOL_DN  &kp C_VOL_UP &trans   &kp RSHFT
+                              &kp LGUI &kp SPACE &trans      &kp BSPC  &trans       &kp RALT
                         >;
                 };
 
-                raise_layer {
-// -----------------------------------------------------------------------------------------
-// |  TAB |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  | BKSP |
-// | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
-// | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
-//                    | GUI |     | SPC |   | ENT |     | ALT |
+                num_layer {
+                        label = "Num";
+// ┌─────┬─────┬─────┬─────┬─────┬─────┐   ┌─────┬─────┬─────┬─────┬─────┬─────┐
+// │     │  1  │  2  │  3  │  4  │  5  │   │  6  │  7  │  8  │  9  │  0  │BSPC │
+// ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+// │ TAB │  !  │  @  │  #  │  $  │  %  │   │  ^  │  &  │  *  │  (  │  )  │     │
+// ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
+// │SHIFT│ F1  │ F2  │ F3  │ F4  │ F5  │   │ F6  │ F7  │ F8  │ F9  │ F10 │SHIFT│
+// └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
+//                   │RIGHT│SPACE│BKSP │   │     │     │LEFT │
+//                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
                         bindings = <
-   &kp  TAB  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR &kp BSPC
-   &kp LCTRL &trans   &trans &trans   &trans   &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp BSLH &kp GRAVE
-   &kp LSHFT &trans   &trans &trans   &trans   &trans      &kp UNDER &kp PLUS  &kp LBRC        &kp RBRC &kp PIPE &kp TILDE
-                             &kp LGUI &trans   &kp SPACE   &kp RET   &trans    &kp RALT
+   &trans    &kp N1   &kp N2 &kp N3   &kp N4    &kp N5      &kp N6    &kp N7   &kp N8    &kp N9    &kp N0  &kp BSPC
+   &kp TAB   &kp EXCL &kp AT &kp HASH &kp DLLR  &kp PRCNT   &kp CARET &kp AMPS &kp ASTRK &kp LPAR  &kp RPAR &trans
+   &kp LSHFT &kp F1   &kp F2 &kp F3   &kp F4    &kp F5      &kp F6    &kp F7   &kp F8    &kp F9    &kp F10 &kp RSHFT
+                             &kp RIGHT &kp SPACE &kp BSPC    &trans    &trans   &kp LEFT
                         >;
                 };
         };
