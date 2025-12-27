@@ -85,7 +85,7 @@
 //                   │ GUI │ SPC │     │   │BKSP │     │ ALT │
 //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
                         bindings = <
-   &kp TAB    &trans &kp HOME &kp UP   &kp END   &kp PG_UP   &kp GRAVE &kp MINUS    &kp EQUAL     &kp LBRC     &kp RBRC &kp DEL
+   &kp TAB    &trans &kp HOME &kp UP   &kp END   &kp PG_UP   &kp GRAVE &kp MINUS    &kp EQUAL     &kp LBKT     &kp RBKT &kp DEL
    &kp CAPS   &trans &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN   &kp LEFT  &kp DOWN     &kp UP        &kp RIGHT    &kp SQT  &kp BSLH
    &kp LSHFT  &trans &trans   &trans   &trans    &trans      &kp F11   &kp F12      &kp C_VOL_DN  &kp C_VOL_UP &trans   &kp RSHFT
                               &kp LGUI &kp SPACE &trans      &kp BSPC  &trans       &kp RALT
