@@ -80,14 +80,14 @@
 // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
 // │CAPS │     │LEFT │DOWN │RIGHT│PGDN │   │ LFT │ DWN │ UP  │ RGT │  '  │  \  │
 // ├─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┤
-// │SHIFT│     │     │     │     │     │   │ F11 │ F12 │ VOL-│VOL+ │     │SHIFT│
+// │SHIFT│ BT0 │ BT1 │ BT2 │     │BTCLR│   │ F11 │ F12 │ VOL-│VOL+ │     │SHIFT│
 // └─────┴─────┴─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┴─────┴─────┘
 //                   │ GUI │ SPC │     │   │BKSP │     │ ALT │
 //                   └─────┴─────┴─────┘   └─────┴─────┴─────┘
                         bindings = <
-   &kp TAB    &trans &kp HOME &kp UP   &kp END   &kp PG_UP   &kp GRAVE &kp MINUS    &kp EQUAL     &kp LBKT     &kp RBKT &kp DEL
-   &kp CAPS   &trans &kp LEFT &kp DOWN &kp RIGHT &kp PG_DN   &kp LEFT  &kp DOWN     &kp UP        &kp RIGHT    &kp SQT  &kp BSLH
-   &kp LSHFT  &trans &trans   &trans   &trans    &trans      &kp F11   &kp F12      &kp C_VOL_DN  &kp C_VOL_UP &trans   &kp RSHFT
+   &kp TAB    &trans           &kp HOME         &kp UP   &kp END            &kp PG_UP   &kp GRAVE &kp MINUS    &kp EQUAL     &kp LBKT     &kp RBKT &kp DEL
+   &kp CAPS   &trans           &kp LEFT         &kp DOWN &kp RIGHT          &kp PG_DN   &kp LEFT  &kp DOWN     &kp UP        &kp RIGHT    &kp SQT  &kp BSLH
+   &kp LSHFT  &bt BT_SEL 0     &bt BT_SEL 1     &bt BT_SEL 2 &trans        &bt BT_CLR  &kp F11   &kp F12      &kp C_VOL_DN  &kp C_VOL_UP &trans   &kp RSHFT
                               &kp LGUI &kp SPACE &trans      &kp BSPC  &trans       &kp RALT
                         >;
                 };
